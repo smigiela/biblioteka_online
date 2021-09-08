@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -20,11 +21,11 @@ class BookController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param BookRequest $request
      *
      * @return Book
      */
-    public function store(Request $request):Book
+    public function store(BookRequest $request):Book
     {
         $newItem = new Book;
         $newItem->author_id = $request->get("author_id");
@@ -56,12 +57,12 @@ class BookController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param BookRequest $request
      * @param Book $author
      *
      * @return Book
      */
-    public function update(Request $request, Book $book):Book
+    public function update(BookRequest $request, Book $book):Book
     {
         $newItem = Book::find($book['id']);
         $newItem->update($request->all());

@@ -15,8 +15,14 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
     public function author()
     {
         return $this->belongsTo(Author::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

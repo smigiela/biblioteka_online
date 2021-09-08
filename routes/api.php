@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\BookController;
 Route::apiResource('/author', AuthorController::class);
 Route::apiResource('/category', CategoryController::class);
 Route::apiResource('/book', BookController::class);
+Route::apiResource('/cart', CartController::class);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
