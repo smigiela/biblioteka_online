@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                        <img style="height: 8vh" src="https://png2.cleanpng.com/sh/bb1c9f3cd849ab03e01b36f6d8243d74/L0KzQYq3VcA2N5Jrj5H0aYP2gLBuTgZma6V0ip9wcnHzeLrqk71jd5DwReV9b3PuPbrzjQV0fKNmjNt4bj3vf7j2TgJme5ZmitVxLYboc8X2kr1jd5DwReZ7YX72gLL5hf51NZJyiJ95bnewc73wkPFzfF46e9VuOHO3RIG3UsJmQV84UaM9NUi7RYK8VccxPGE2Uag5MEC5PsH1h5==/kisspng-vector-graphics-book-stock-illustration-logo-research-vector-book-transparent-amp-png-clipart-5cce8c440022e9.3914588515570401960006.png">
                     </a>
                 </div>
 
@@ -17,11 +17,19 @@
                     </x-nav-link>
                 </div>
                 @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['user', 'admin']))
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.catalogOfBooks')" :active="request()->routeIs('dashboard.catalogOfBooks')">
-                        {{ __('Katalog') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.catalogOfBooks')" :active="request()->routeIs('dashboard.catalogOfBooks')">
+                            {{ __('Katalog') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.adminPanel')" :active="request()->routeIs('dashboard.adminPanel')">
+                            {{ __('adminPanel') }}
+                        </x-nav-link>
+                    </div>
                 @endif
             </div>
 

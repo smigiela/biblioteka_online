@@ -32137,7 +32137,8 @@ select {
 }
 
 .menuAdmin {
-  width: 15%;
+  min-width: 15vw;
+  width: 15vw;
 }
 
 @media (min-width: 640px) {

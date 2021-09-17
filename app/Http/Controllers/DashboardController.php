@@ -19,8 +19,8 @@ class DashboardController extends Controller
     {
         return view('catalogOfBooks');
     }
-    public function book()
+    public function adminPanel()
     {
-        return view('book');
+        return view('adminPanel');
     }
 }
