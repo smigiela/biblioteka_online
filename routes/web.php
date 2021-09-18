@@ -25,7 +25,7 @@ Route::group(['middleware'=>['auth']], function(){
 
 // auth -admin
 Route::group(['middleware'=>['auth','role:admin']], function(){
-    Route::get('/dashboard/book', [DashboardController::class, 'adminPanel'])->name('dashboard.adminPanel');
+    Route::get('/dashboard/adminPanel', [DashboardController::class, 'adminPanel'])->name('dashboard.adminPanel');
 });
 
 // auth -user
