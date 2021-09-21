@@ -28,10 +28,10 @@ class AuthorRequest extends FormRequest
         self::METHOD_PUT => [
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-            'nationality' => 'string|max:255',
-            'placeOfBirth' => 'string|max:255',
-            'dateOfBirth' => 'string|date|max:255',
-            'dateOfDeath' => 'string|date|max:255',
+            'nationality' => 'max:255',
+            'placeOfBirth' => 'max:255',
+            'dateOfBirth' => 'date|max:255',
+            'dateOfDeath' => 'date|max:255',
         ],
         self::METHOD_DELETE => [
             'powod' => 'required|string',
@@ -78,11 +78,11 @@ class AuthorRequest extends FormRequest
 
             'dateOfBirth.string' => 'Pole Data urodzenia musi zawierać tekst',
             'dateOfBirth.max' => 'Pole Data urodzenia może maksymalnie zawierać 255 znaków',
-            'dateOfBirth.date' => 'Pole Data urodzenia musi być formatu daty',
+            'dateOfBirth.date' => 'Pole Data urodzenia musi być formatu daty  typu: RRRR-MM-DD',
 
-            'dateOfDeath.string' => 'Pole Miejsce śmierci musi zawierać tekst',
-            'dateOfDeath.max' => 'Pole Miejsce śmierci może maksymalnie zawierać 255 znaków',
-            'dateOfDeath.date' => 'Pole Miejsce śmierci musi być formatu daty',
+            'dateOfDeath.string' => 'Pole Data śmierci musi zawierać tekst',
+            'dateOfDeath.max' => 'Pole Data śmierci może maksymalnie zawierać 255 znaków',
+            'dateOfDeath.date' => 'Pole Data śmierci musi być formatu daty  typu: RRRR-MM-DD',
         ];
     }
 }

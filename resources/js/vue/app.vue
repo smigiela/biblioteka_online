@@ -1,26 +1,33 @@
 <template>
-    <div style="margin: 0; padding: 3px; margin-top: 1vh;">
-        <div style="margin: 0; padding: 3px; width: 10%; height: 90vh; float: left;">
+    <div class="mainDiv">
+        <div class="leftDiv">
 
-            <button style="width: 100%; margin-bottom: 10px;" class="btn btn-outline-success" type="button">Ksiązka</button>
-            <button style="width: 100%; margin-bottom: 10px;" class="btn btn-outline-success" type="button">Autor</button>
-            <button style="width: 100%; margin-bottom: 10px;" class="btn btn-outline-success" type="button" @click="showHideCategory()">Gatunek</button>
+            <button class="btn btn-outline-success buttonMenu" type="button">Ksiązka</button>
+            <button class="btn btn-outline-success buttonMenu" type="button" @click="showHideAuthor()">Autor</button>
+            <button class="btn btn-outline-success buttonMenu" type="button" @click="showHideCategory()">Gatunek</button>
 
         </div>
-        <div style="margin: 0; padding: 3px; padding-left: 1vw; padding-right: 1vw; width: 90%; height: 90vh; float: left;">
+        <div class="rightDiv">
 
             <div v-if="showComponentCategory">
-            <categories></categories>
+                <categories></categories>
+            </div>
+
+            <div v-if="showComponentAuthors">
+                <authors></authors>
             </div>
 
         </div>
+
     </div>
 </template>
 
 <script>
 import Categories from "./Category/Categories"
+import Authors from "./Author/Authors"
+
 export default {
-    components: {Categories},
+    components: {Categories, Authors},
     data() {
         return {
             showComponentCategory: false,
@@ -29,13 +36,17 @@ export default {
         };
     },
     mounted() {
-        console.log('Component mounted.')
     },
     methods: {
         showHideCategory() {
             this.showComponentAuthors = false;
             this.showComponentBooks = false;
-            this.showComponentCategory=!this.showComponentCategory;
+            this.showComponentCategory = !this.showComponentCategory;
+        },
+        showHideAuthor() {
+            this.showComponentCategory = false;
+            this.showComponentBooks = false;
+            this.showComponentAuthors = !this.showComponentAuthors;
         },
     }
 }

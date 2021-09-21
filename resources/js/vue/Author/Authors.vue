@@ -2,29 +2,33 @@
 
     <div>
         <input class="search btn-outline-success" type="text" v-model="search" placeholder="Szukaj..."/>
-        <add-category class="addPosition" @added="getCategory"/>
+        <add-author class="addPosition" @added="getAuthor"/>
 
         <div>
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Gatunek</th>
+                    <th scope="col">Imię</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Narodowość</th>
                     <th scope="col">Operacje</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr style="width: auto;" v-for="category in filteredList()" :key="category.id">
-                    <td style="min-width: 8px;">{{ category.id }}</td>
+                <tr style="width: auto;" v-for="author in filteredList()" :key="author.id">
+                    <td style="min-width: 8px;">{{ author.id }}</td>
 
-                    <td style="width: 80%;">{{ category.nameOfCategory }}</td>
+                    <td style="width: 26%;"><span v-if="author.fname">{{ author.fname }}</span><span v-else>Brak danych</span></td>
+                    <td style="width: 26%;"><span v-if="author.lname">{{ author.lname }}</span><span v-else>Brak danych</span></td>
+                    <td style="width: 26%;"><span v-if="author.nationality">{{ author.nationality }}</span><span v-else>Brak danych</span></td>
 
                     <td style="min-width: 135px">
 
-                        <delete-category :id="category.id" @deleted="getCategory"/>
-                        <edit-category :category="category" @edited="getCategory"/>
-                        <show-category :id="category.id"/>
+                        <delete-author :id="author.id" @deleted="getAuthor"/>
+                        <edit-author :author="author" @edited="getAuthor"/>
+                        <show-author :id="author.id"/>
 
                     </td>
                 </tr>
@@ -38,13 +42,14 @@
 </template>
 
 <script>
-import AddCategory from "./addCategory";
-import DeleteCategory from "./deleteCategory";
-import EditCategory from "./editCategory";
-import ShowCategory from "./showCategory";
+import AddAuthor from "./addAuthor";
+import DeleteAuthor from "./deleteAuthor";
+import EditAuthor from "./editAuthor";
+import ShowAuthor from "./showAuthor";
+
 export default {
-    name: "listOfCategories",
-    components: {AddCategory, DeleteCategory, EditCategory, ShowCategory},
+    name: "listOfAuthors",
+    components: {DeleteAuthor, AddAuthor, EditAuthor, ShowAuthor},
     data() {
         return {
             items: null,
@@ -52,11 +57,11 @@ export default {
         };
     },
     mounted() {
-        this.getCategory();
+        this.getAuthor();
     },
     methods: {
-        getCategory() {
-            this.axios.get("/api/category").then((response) => {
+        getAuthor() {
+            this.axios.get("/api/author").then((response) => {
                 this.items = response.data;
             });
         },
