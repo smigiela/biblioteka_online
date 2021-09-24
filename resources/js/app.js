@@ -12,6 +12,13 @@ import VModal from 'vue-js-modal';
 Vue.use(VueAxios, axios);
 Vue.use(VModal);
 
+import VueGoodTablePlugin from 'vue-good-table';
+
+// import the styles
+import 'vue-good-table/dist/vue-good-table.css'
+
+Vue.use(VueGoodTablePlugin);
+
 const app = new Vue({
     el: '#app',
     components: { App }

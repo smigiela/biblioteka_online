@@ -2,7 +2,7 @@
 
     <div>
 
-        <add-category class="addPosition" @added="getCategory"/>
+        <add-book class="addPosition" @added="getBook"/>
         <br><br>
         <vue-good-table
             :columns="columns"
@@ -21,9 +21,9 @@
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'operations'">
                   <span>
-                      <delete-category :id="props.row.id" @deleted="getCategory"/>
-                      <edit-category :category="props.row" @edited="getCategory"/>
-                      <show-category :id="props.row.id"/>
+                      <delete-book :id="props.row.id" @deleted="getBook"/>
+                      <edit-book :book="props.row" @edited="getBook"/>
+                      <show-book :id="props.row.id"/>
                   </span>
                 </span>
             </template>
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import AddCategory from "./addCategory";
-import DeleteCategory from "./deleteCategory";
-import EditCategory from "./editCategory";
-import ShowCategory from "./showCategory";
+import AddBook from "./addBook";
+import DeleteBook from "./deleteBook";
+import EditBook from "./editBook";
+import ShowBook from "./showBook";
 
 export default {
-    name: "listOfCategories",
-    components: {AddCategory, DeleteCategory, EditCategory, ShowCategory},
+    name: "listOfBooks",
+    components: {AddBook, DeleteBook, EditBook, ShowBook},
     data() {
         return {
             columns: [
@@ -51,8 +51,24 @@ export default {
                     type: 'number',
                 },
                 {
+                    label: 'Tytuł',
+                    field: 'title',
+                },
+                {
+                    label: 'ISBN',
+                    field: 'ISBN',
+                },
+                {
+                    label: 'Autor',
+                    field: 'author.lname',
+                },
+                {
                     label: 'Gatunek',
-                    field: 'nameOfCategory',
+                    field: 'category.nameOfCategory',
+                },
+                {
+                    label: 'Cena',
+                    field: 'price',
                 },
                 {
                     label: 'Operacje',
@@ -64,11 +80,11 @@ export default {
         };
     },
     mounted() {
-        this.getCategory();
+        this.getBook();
     },
     methods: {
-        getCategory() {
-            this.axios.get("/api/category").then((response) => {
+        getBook() {
+            this.axios.get("/api/book").then((response) => {
                 this.rows = response.data;
             });
         },

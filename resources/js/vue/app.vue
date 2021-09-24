@@ -2,9 +2,10 @@
     <div class="mainDiv">
         <div class="leftDiv">
 
-            <button class="btn btn-outline-success buttonMenu" type="button">Ksiązka</button>
+            <button class="btn btn-outline-success buttonMenu" type="button" @click="showHideBook()">Ksiązka</button>
             <button class="btn btn-outline-success buttonMenu" type="button" @click="showHideAuthor()">Autor</button>
-            <button class="btn btn-outline-success buttonMenu" type="button" @click="showHideCategory()">Gatunek</button>
+            <button class="btn btn-outline-success buttonMenu" type="button" @click="showHideCategory()">Gatunek
+            </button>
 
         </div>
         <div class="rightDiv">
@@ -17,6 +18,10 @@
                 <authors></authors>
             </div>
 
+            <div v-if="showComponentBooks">
+                <books></books>
+            </div>
+
         </div>
 
     </div>
@@ -25,19 +30,25 @@
 <script>
 import Categories from "./Category/Categories"
 import Authors from "./Author/Authors"
+import Books from "./Book/Books"
 
 export default {
-    components: {Categories, Authors},
+    components: {Categories, Authors, Books},
     data() {
         return {
             showComponentCategory: false,
             showComponentAuthors: false,
-            showComponentBooks: false
+            showComponentBooks: true
         };
     },
     mounted() {
     },
     methods: {
+        showHideBook() {
+            this.showComponentAuthors = false;
+            this.showComponentCategory = false;
+            this.showComponentBooks = !this.showComponentBooks;
+        },
         showHideCategory() {
             this.showComponentAuthors = false;
             this.showComponentBooks = false;
