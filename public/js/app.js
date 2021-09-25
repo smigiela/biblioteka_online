@@ -4094,6 +4094,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4539,6 +4546,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _deleteBook__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deleteBook */ "./resources/js/vue/Book/deleteBook.vue");
 /* harmony import */ var _editBook__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editBook */ "./resources/js/vue/Book/editBook.vue");
 /* harmony import */ var _showBook__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./showBook */ "./resources/js/vue/Book/showBook.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5104,6 +5118,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _deleteCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deleteCategory */ "./resources/js/vue/Category/deleteCategory.vue");
 /* harmony import */ var _editCategory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editCategory */ "./resources/js/vue/Category/editCategory.vue");
 /* harmony import */ var _showCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./showCategory */ "./resources/js/vue/Category/showCategory.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -34936,12 +34957,19 @@ var render = function() {
           columns: _vm.columns,
           rows: this.rows,
           "search-options": {
-            enabled: true
+            enabled: true,
+            placeholder: "Szukaj"
           },
           "pagination-options": {
             enabled: true,
             perPage: 5,
-            mode: "pages"
+            mode: "pages",
+            nextLabel: "Następna",
+            prevLabel: "Poprzednia",
+            rowsPerPageLabel: "Rekordów na stronę",
+            ofLabel: "z",
+            pageLabel: "strona",
+            allLabel: "Wszystkie"
           },
           theme: "polar-bear",
           "max-height": "60vh",
@@ -36025,12 +36053,19 @@ var render = function() {
           columns: _vm.columns,
           rows: this.rows,
           "search-options": {
-            enabled: true
+            enabled: true,
+            placeholder: "Szukaj"
           },
           "pagination-options": {
             enabled: true,
             perPage: 5,
-            mode: "pages"
+            mode: "pages",
+            nextLabel: "Następna",
+            prevLabel: "Poprzednia",
+            rowsPerPageLabel: "Rekordów na stronę",
+            ofLabel: "z",
+            pageLabel: "strona",
+            allLabel: "Wszystkie"
           },
           theme: "polar-bear",
           "max-height": "60vh",
@@ -37403,12 +37438,19 @@ var render = function() {
           columns: _vm.columns,
           rows: this.rows,
           "search-options": {
-            enabled: true
+            enabled: true,
+            placeholder: "Szukaj"
           },
           "pagination-options": {
             enabled: true,
             perPage: 5,
-            mode: "pages"
+            mode: "pages",
+            nextLabel: "Następna",
+            prevLabel: "Poprzednia",
+            rowsPerPageLabel: "Rekordów na stronę",
+            ofLabel: "z",
+            pageLabel: "strona",
+            allLabel: "Wszystkie"
           },
           theme: "polar-bear",
           "max-height": "60vh",

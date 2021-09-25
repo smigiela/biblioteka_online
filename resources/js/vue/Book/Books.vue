@@ -8,12 +8,19 @@
             :columns="columns"
             :rows="this.rows"
             :search-options="{
-                enabled: true
+                enabled: true,
+                placeholder: 'Szukaj',
             }"
             :pagination-options="{
                 enabled: true,
                 perPage: 5,
-                mode: 'pages'
+                mode: 'pages',
+                nextLabel: 'Następna',
+                prevLabel: 'Poprzednia',
+                rowsPerPageLabel: 'Rekordów na stronę',
+                ofLabel: 'z',
+                pageLabel: 'strona',
+                allLabel: 'Wszystkie',
               }"
             theme="polar-bear"
             max-height="60vh"

@@ -26,11 +26,20 @@
                     </div>
                 @endif
 
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['user', 'admin']))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('cart')"
+                                    :active="request()->routeIs('cart')">
+                            {{ __('Koszyk') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
                 @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('dashboard.adminPanel')"
                                     :active="request()->routeIs('dashboard.adminPanel')">
-                            {{ __('adminPanel') }}
+                            {{ __('Panel Administratora') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -90,11 +99,35 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Konto') }}
             </x-responsive-nav-link>
         </div>
 
-        <!-- Responsive Settings Options -->
+        @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['user', 'admin']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('dashboard.catalogOfBooks')" :active="request()->routeIs('dashboard.catalogOfBooks')">
+                    {{ __('Katalog') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['user', 'admin']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+                    {{ __('Koszyk') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('dashboard.adminPanel')" :active="request()->routeIs('dashboard.adminPanel')">
+                    {{ __('Panel Administratora') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+    <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>

@@ -10,22 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    /**
-     * @return Collection
-     */
-    public function index():Collection
+    public function index()
     {
-        return Cart::with('user')
+        $cart = Cart::with('user')
             ->with('book')
+            ->where('user_id', Auth::user()->id)
             ->get();
+        return view('cart', ['cart' => $cart]);
     }
 
-    /**
-     * @param CartRequest $request
-     *
-     * @return Cart
-     */
-    public function store(CartRequest $request):Cart
+    public function destroy($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+        return redirect('/cart')->with('messageRed', 'Pomyślnie usunięto z koszyka!');;
+    }
+
+    public function store(Request $request)
     {
         $newItem = new Cart;
         $newItem->user_id = $request->get("user_id");
@@ -35,50 +36,17 @@ class CartController extends Controller
         $newItem->totalCost = round($request->get("price") * $request->get("amount"), 2);
         $newItem->save();
 
-        return $newItem;
+        return redirect('/cart')->with('messageGreen', 'Pomyślnie dodano do koszyka!');;
     }
 
-    /**
-     * @param Cart $author
-     *
-     * @return Cart
-     */
-    public function show(Cart $cart):Cart
+    public function submitOrder()
     {
-        $var = Cart::findOrFail($cart['id'])
-            ->with('user')
-            ->with('book')
-            ->where('id', $cart['id'])
-            ->first();
+        $var = Cart::where('user_id', Auth::user()->id)
+        ->chunkById(200, function ($flights) {
+            $flights->each->update(['amount' => Cart::latest('id')->pluck('id')->first() + 1]);
+        }, $column = 'id');
+
+
         return $var;
-    }
-
-    /**
-     * @param CartRequest $request
-     * @param Cart $author
-     *
-     * @return Cart
-     */
-    public function update(CartRequest $request, Cart $cart):Cart
-    {
-        $newItem = Cart::find($cart['id']);
-        $newItem->update($request->all());
-        $newItem->totalCost = round($request->get("price") * $request->get("amount"), 2);
-        return $newItem;
-    }
-
-    /**
-     * @param Cart $author
-     *
-     * @return Cart
-     */
-    public function destroy(Cart $cart):String
-    {
-        if (Cart::find($cart['id'])) {
-            Cart::destroy($cart['id']);
-            return "Pomyślnie usunięto autora (ID: " . $cart['id'] . ")";
-        } else {
-            return "Author (ID: " . $cart['id'] . ") nie istnieje";
-        }
     }
 }

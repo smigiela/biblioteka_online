@@ -192,13 +192,14 @@ html {
 
 tr {
 }
+
 tbody, td, tfoot, th, thead, tr {
     background-color: #f3f4f6 !important;
     border-right-style: none !important;
     border-left-style: none !important;
 }
 
-thead{
+thead {
     font-weight: bold !important;
     border-bottom: 2px solid #28a745 !important;
 }
@@ -254,6 +255,7 @@ table.vgt-table {
 .vgt-table thead th.sorting-asc button:after {
     border-bottom: 5px solid #28a745 !important;
 }
+
 .vgt-right-align {
     min-width: 10px !important;
     width: 10px !important;
@@ -267,6 +269,28 @@ a {
 a:hover {
     color: #28a745 !important;
     text-decoration: none !important;
+}
+
+.myBorder {
+    border-color: #28a745;
+}
+
+.oneOfBook {
+    width: 32%;
+    float: left;
+    margin: 1% 0 2% 1%;
+}
+
+@media only screen and (max-width: 520px) {
+    .oneOfBook {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .oneOfBook {
+        width: 48%;
+    }
 }
 
 @media only screen and (max-width: 870px) {

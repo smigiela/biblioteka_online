@@ -32332,7 +32332,7 @@ tbody, td, tfoot, th, thead, tr {
   border-left-style: none !important;
 }
 
-thead{
+thead {
   font-weight: bold !important;
   border-bottom: 2px solid #28a745 !important;
 }
@@ -32402,6 +32402,28 @@ a {
 a:hover {
   color: #28a745 !important;
   text-decoration: none !important;
+}
+
+.myBorder {
+  border-color: #28a745;
+}
+
+.oneOfBook {
+  width: 32%;
+  float: left;
+  margin: 1% 0 2% 1%;
+}
+
+@media only screen and (max-width: 520px) {
+  .oneOfBook {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .oneOfBook {
+    width: 48%;
+  }
 }
 
 @media only screen and (max-width: 870px) {

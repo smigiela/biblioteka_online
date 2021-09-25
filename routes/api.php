@@ -21,7 +21,6 @@ use App\Http\Controllers\CartController;
 Route::apiResource('/author', AuthorController::class);
 Route::apiResource('/category', CategoryController::class);
 Route::apiResource('/book', BookController::class);
-Route::apiResource('/cart', CartController::class);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

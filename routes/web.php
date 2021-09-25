@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ Route::get('/', function () {
 // auth -all
 Route::group(['middleware'=>['auth']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/catalogOfBooks', [DashboardController::class, 'catalogOfBooks'])->name('dashboard.catalogOfBooks');
+    Route::post('/addToCart', [CartController::class, 'store']);
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/deleteCart/{id}', [CartController::class, 'destroy']);
+    Route::get('/submitOrder', [CartController::class, 'submitOrder']);
 });
 
 // auth -admin
@@ -30,7 +36,7 @@ Route::group(['middleware'=>['auth','role:admin']], function(){
 
 // auth -user
 Route::group(['middleware'=>['auth','role:user|admin']], function(){
-    Route::get('/dashboard/catalogOfBooks', [DashboardController::class, 'catalogOfBooks'])->name('dashboard.catalogOfBooks');
+
 });
 
 require __DIR__.'/auth.php';
