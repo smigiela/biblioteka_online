@@ -21,18 +21,21 @@
                             </div>
                         @endif
                     </div>
+                    @if($cart->count())
 
-                    @foreach($cart as $cart)
+                    @foreach ($cart as $cart)
                         <p>{{$cart->user->name}},
-                        {{$cart->book->title}},
-                        {{$cart->amount}},
-                        {{$cart->book->price}},
-                        {{$cart->totalCost}},
-                        <a href="{{ url('/deleteCart/'.$cart->id) }}" class="btn btn-sm btn-danger">Usuń</a>
+                            {{$cart->book->title}},
+                            {{$cart->amount}},
+                            {{$cart->book->price}},
+                            {{$cart->totalCost}},
+                            <a href="{{ url('/deleteCart/'.$cart->id) }}" class="btn btn-sm btn-danger">Usuń</a>
                         </p>
                     @endforeach
-
-                    <a href="{{ url('submitOrder') }}" class="btn btn-sm btn-success">Złóż zamówienie</a>
+                        <a href="{{ url('submitOrder') }}" class="btn btn-sm btn-success">Złóż zamówienie</a>
+                    @else
+                        <p>Koszyk jest pusty!</p>
+                    @endif
 
                 </div>
             </div>

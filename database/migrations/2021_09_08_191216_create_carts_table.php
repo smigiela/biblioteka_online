@@ -17,9 +17,11 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('order_id');
             $table->integer('amount');
             $table->integer('price');
             $table->double('totalCost');
+            $table->integer('status');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -31,6 +33,11 @@ class CreateCartsTable extends Migration
                 ->references('id')
                 ->on('books')
                 ->onDelete('cascade');
+
+//            $table->foreign('order_id')
+//                ->references('id')
+//                ->on('orders')
+//                ->onDelete('cascade');
         });
     }
 

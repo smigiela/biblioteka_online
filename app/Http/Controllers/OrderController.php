@@ -2,36 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CartRequest;
 use App\Models\Cart;
 use App\Models\Order;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
     public function index()
     {
-        $cart = Cart::with('user')
-            ->with('book')
+        $order = Order::with('carts')
             ->where('user_id', Auth::user()->id)
-            ->where('status', '==', '0')
             ->get();
-        return view('cart', ['cart' => $cart]);
+        return view('order', ['order' => $order]);
     }
 
-    public function destroy($id)
+    public function submitOrder()
     {
-        $cart = Cart::find($id);
-        $cart->delete();
-        return redirect('/cart')->with('messageRed', 'Pomyślnie usunięto z koszyka!');
-    }
-
-    public function store(Request $request)
-    {
-        $newItem = new Cart;
+        $newItem = new Order;
 
         $dt = Carbon::parse();
         $actualMonth = $dt->month; //symulacja miesiecy
@@ -50,21 +40,35 @@ class CartController extends Controller
             }else{
                 $number = 0;
             }
-            $newItem->order_id = ++$number;
+
+            $newItem->number = ++$number; // zwiększenie numeru o jeden
         } else
         {
             $number = 0;
-            $newItem->order_id = ++$number;
+            $newItem->number = ++$number; // zwiększenie numeru o jeden
         }
 
-        $newItem->user_id = $request->get("user_id");
-        $newItem->book_id = $request->get("book_id");
-        $newItem->amount = $request->get("amount");
-        $newItem->price = $request->get("price");
-        $newItem->status = 0;
-        $newItem->totalCost = round($request->get("price") * $request->get("amount"), 2);
+        $newItem->month = $actualMonth; //aktualny miesiac
+        $newItem->year = $actualYear; //aktualny rok
+        $newItem->orderNumber = $number."/".$actualMonth."/".$actualYear; //pełna nazwa
+        $newItem->user_id = Auth::user()->id;
         $newItem->save();
 
-        return redirect('/cart')->with('messageGreen', 'Pomyślnie dodano do koszyka!');;
+
+        $var = Cart::where('user_id', Auth::user()->id)
+            ->chunkById(200, function ($status) {
+                $status->each->update(['status' => 1]);
+            }, $column = 'id');
+
+        return redirect('/cart');
+    }
+
+    public function detailOrder($id)
+    {
+        $orderDetail = Order::with('carts')
+            ->where('user_id', Auth::user()->id)
+            ->where('id', $id)
+            ->get();
+        return view('orderDetail', ['orderDetail' => $orderDetail]);
     }
 }

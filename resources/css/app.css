@@ -287,6 +287,12 @@ a:hover {
     }
 }
 
+@media (min-width: 640px) {
+    .sm\:ml-10 {
+        margin-left: 1rem !important;
+    }
+}
+
 @media only screen and (max-width: 750px) {
     .oneOfBook {
         width: 48%;

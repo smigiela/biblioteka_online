@@ -11,6 +11,11 @@ class Author extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'dateOfBirth' => 'date:Y-m-d',
+        'dateOfDeath' => 'date:Y-m-d',
+    ];
+
     public function book()
     {
         return $this->hasMany(Book::class);

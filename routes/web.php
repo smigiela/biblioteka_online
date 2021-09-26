@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,9 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/addToCart', [CartController::class, 'store']);
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/deleteCart/{id}', [CartController::class, 'destroy']);
-    Route::get('/submitOrder', [CartController::class, 'submitOrder']);
+    Route::get('/order', [OrderController::class, 'index'])->name('order');
+    Route::get('/submitOrder', [OrderController::class, 'submitOrder']);
+    Route::get('/detailOrder/{id}', [OrderController::class, 'detailOrder']);
 });
 
 // auth -admin

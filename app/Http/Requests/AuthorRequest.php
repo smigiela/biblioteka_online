@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AuthorRequest extends FormRequest
@@ -20,18 +21,18 @@ class AuthorRequest extends FormRequest
         self::METHOD_POST => [
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-            'nationality' => 'string|max:255',
-            'placeOfBirth' => 'string|max:255',
-            'dateOfBirth' => 'string|date|max:255',
-            'dateOfDeath' => 'string|date|max:255',
+            'nationality' => 'nullable|string|max:255',
+            'placeOfBirth' => 'nullable|string|max:255',
+            'dateOfBirth' => 'nullable|date',
+            'dateOfDeath' => 'nullable|date',
         ],
         self::METHOD_PUT => [
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-            'nationality' => 'max:255',
-            'placeOfBirth' => 'max:255',
-            'dateOfBirth' => 'date|max:255',
-            'dateOfDeath' => 'date|max:255',
+            'nationality' => 'nullable|string|max:255',
+            'placeOfBirth' => 'nullable|string|max:255',
+            'dateOfBirth' => 'nullable|date',
+            'dateOfDeath' => 'nullable|date',
         ],
         self::METHOD_DELETE => [
             'powod' => 'required|string',
@@ -84,5 +85,18 @@ class AuthorRequest extends FormRequest
             'dateOfDeath.max' => 'Pole Data śmierci może maksymalnie zawierać 255 znaków',
             'dateOfDeath.date' => 'Pole Data śmierci musi być formatu daty  typu: RRRR-MM-DD',
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'dateOfBirth' => Carbon::parse($this->dateOfBirth),
+            'dateOfDeath' => Carbon::parse($this->dateOfDeath),
+        ]);
     }
 }

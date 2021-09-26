@@ -35,6 +35,15 @@
                     </div>
                 @endif
 
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['user', 'admin']))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('order')"
+                                    :active="request()->routeIs('order')">
+                            {{ __('Zamówienia') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
                 @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('dashboard.adminPanel')"
@@ -115,6 +124,14 @@
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
                     {{ __('Koszyk') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['user', 'admin']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('order')" :active="request()->routeIs('order')">
+                    {{ __('Zamówienia') }}
                 </x-responsive-nav-link>
             </div>
         @endif
