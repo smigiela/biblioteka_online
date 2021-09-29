@@ -10,15 +10,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white">
 
-                    @foreach($orderDetail as $order)
-{{$order}}
-{{--                        @foreach($order->carts as $cart)--}}
-{{--                            {{$cart->id}},--}}
-{{--                            {{$cart->book_id}},--}}
-{{--                            {{$cart->order_id}},<br>--}}
-{{--                            {{$cart->amount}} * {{$cart->price}} = {{$cart->totalCost}}. <br><br>--}}
+                    @foreach($orderDetail as $detail)
+                        <h1 style="text-align: center">{{$detail->orderNumber}}</h1>
+                    @endforeach
 
-{{--                        @endforeach--}}
+                    @foreach($orderDetail as $order)
+
+                        @foreach($order->carts as $cart)
+                            {{$cart->book->title}},
+                            {{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.<br><br>
+
+                        @endforeach
 
                     @endforeach
 

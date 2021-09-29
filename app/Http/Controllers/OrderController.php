@@ -50,7 +50,7 @@ class OrderController extends Controller
 
         $newItem->month = $actualMonth; //aktualny miesiac
         $newItem->year = $actualYear; //aktualny rok
-        $newItem->orderNumber = $number."/".$actualMonth."/".$actualYear; //pełna nazwa
+        $newItem->orderNumber = "FAV/".$number."/".$actualMonth."/".$actualYear; //pełna nazwa
         $newItem->user_id = Auth::user()->id;
         $newItem->save();
 
@@ -60,7 +60,7 @@ class OrderController extends Controller
                 $status->each->update(['status' => 1]);
             }, $column = 'id');
 
-        return redirect('/cart');
+        return redirect('/cart')->with('messageGreen', 'Pomyślnie złożono zamówienie!');
     }
 
     public function detailOrder($id)
@@ -69,6 +69,8 @@ class OrderController extends Controller
             ->where('user_id', Auth::user()->id)
             ->where('id', $id)
             ->get();
-        return view('orderDetail', ['orderDetail' => $orderDetail]);
+        $dt = Carbon::parse();
+
+        return view('orderDetail', ['orderDetail' => $orderDetail, 'dt' => $dt]);
     }
 }

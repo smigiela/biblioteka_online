@@ -13,7 +13,8 @@ class DashboardController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('admin')) {
-            return view('admindashboard');
+            $quantityBooks = Cart::where('user_id', Auth::user()->id)->count();
+            return view('admindashboard', ['quantityBooks' => $quantityBooks]);
         } else {
             return view('userdashboard');
         }

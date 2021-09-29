@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white">
 
                     @forelse ($order as $order)
-                        <a href="{{ url('/detailOrder/'.$order->id) }}" class="btn">Zamówienie {{$order->id}}</a>
+                        <a href="{{ url('/detailOrder/'.$order->id) }}" class="btn">Zamówienie {{$order->orderNumber}}</a>
                                     <br>
                     @empty
                                 <p>Brak zamówień</p>

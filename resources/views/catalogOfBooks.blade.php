@@ -13,31 +13,35 @@
 
                     <h2 style="margin-bottom: 3vh;" class="text-center">Katalog książek</h2>
 
-                    @foreach($books as $book)
-                    <div class="oneOfBook card">
+                    @if($books->count())
 
-                        <h5 class="card-header">{{$book->title}}</h5>
+                        @foreach ($books as $book)
+                            <div class="oneOfBook card">
 
-                        <div class="card-body">
+                                <h5 class="card-header">{{$book->title}}</h5>
 
-                            <p class="card-text">{{$book->author->fname}} {{$book->author->lname}}</p>
-                            <p class="card-text">{{$book->category->nameOfCategory}}</p>
-                            <p class="card-text">{{$book->price}} zł</p>
+                                <div class="card-body">
 
-                            <form action="{{ url('addToCart') }}" method="post" novalidate>
-                                @csrf
-                                <input name="user_id" type="hidden" value="{{Auth::user()->id}}">
-                                <input name="book_id" type="hidden" value="{{$book->id}}">
-                                <input name="amount" type="hidden" value="1">
-                                <input name="price" type="hidden" value="{{$book->price}}">
-                                <button class="btn btn-outline-success" type="submit">Dodaj do koszyka</button>
-                            </form>
+                                    <p class="card-text">{{$book->author->fname}} {{$book->author->lname}}</p>
+                                    <p class="card-text">{{$book->category->nameOfCategory}}</p>
+                                    <p class="card-text">{{$book->price}} zł</p>
 
-                        </div>
+                                    <form action="{{ url('addToCart') }}" method="post" novalidate>
+                                        @csrf
+                                        <input name="user_id" type="hidden" value="{{Auth::user()->id}}">
+                                        <input name="book_id" type="hidden" value="{{$book->id}}">
+                                        <input name="amount" type="hidden" value="1">
+                                        <input name="price" type="hidden" value="{{$book->price}}">
+                                        <button class="btn btn-outline-success" type="submit">Dodaj do koszyka</button>
+                                    </form>
 
-                    </div>
-                    @endforeach
+                                </div>
 
+                            </div>
+                        @endforeach
+                    @else
+                        <p style="color:red; text-align: center; font-size: 5vh;">Brak aktualnie dostępnych książek!</p>
+                    @endif
 
                 </div>
             </div>
