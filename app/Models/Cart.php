@@ -23,6 +23,16 @@ class Cart extends Model
         return $this->belongsTo(Book::class);
     }
 
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);

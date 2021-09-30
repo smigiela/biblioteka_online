@@ -59,6 +59,9 @@ class CartController extends Controller
 
         $newItem->user_id = $request->get("user_id");
         $newItem->book_id = $request->get("book_id");
+        $newItem->authorSurname = $request->get("author_lname");
+        $newItem->authorName = $request->get("author_fname");
+        $newItem->category = $request->get("category");
         $newItem->amount = $request->get("amount");
         $newItem->price = $request->get("price");
         $newItem->status = 0;

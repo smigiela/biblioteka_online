@@ -22,6 +22,9 @@ class CreateCartsTable extends Migration
             $table->integer('price');
             $table->double('totalCost');
             $table->integer('status');
+            $table->string('authorSurname')->nullable();
+            $table->string('authorName')->nullable();
+            $table->string('category')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

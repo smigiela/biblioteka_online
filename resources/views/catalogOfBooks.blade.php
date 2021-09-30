@@ -32,6 +32,9 @@
                                         <input name="book_id" type="hidden" value="{{$book->id}}">
                                         <input name="amount" type="hidden" value="1">
                                         <input name="price" type="hidden" value="{{$book->price}}">
+                                        <input name="author_lname" type="hidden" value="{{$book->author->lname}}">
+                                        <input name="author_fname" type="hidden" value="{{$book->author->fname}}">
+                                        <input name="category" type="hidden" value="{{$book->category->nameOfCategory}}">
                                         <button class="btn btn-outline-success" type="submit">Dodaj do koszyka</button>
                                     </form>
 
