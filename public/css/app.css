@@ -32414,6 +32414,26 @@ a:hover {
   margin: 1% 0 2% 1%;
 }
 
+.cartHeader {
+  font-size: 20px;
+  float: left;
+  color: #585c6e !important;
+}
+
+.cartColor {
+  color: #585c6e !important;
+}
+
+.cartMakeOrder {
+  font-size: 20px !important;
+  padding: 2vh !important;
+  margin: 3vh !important;
+}
+
+.deleteHover:hover {
+  color: red !important;
+}
+
 @media only screen and (max-width: 520px) {
   .oneOfBook {
     width: 100% !important;

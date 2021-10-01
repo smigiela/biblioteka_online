@@ -19,7 +19,10 @@ class CartController extends Controller
             ->where('user_id', Auth::user()->id)
             ->where('status', '==', '0')
             ->get();
-        return view('cart', ['cart' => $cart]);
+
+        $totalPrice = Cart::where('user_id', Auth::user()->id)->where('status', '==', '0')->sum('totalCost') ?? null;
+
+        return view('cart', ['cart' => $cart, 'totalPrice' => $totalPrice]);
     }
 
     public function destroy($id)
