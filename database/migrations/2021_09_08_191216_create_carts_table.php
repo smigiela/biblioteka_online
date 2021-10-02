@@ -19,7 +19,7 @@ class CreateCartsTable extends Migration
             $table->unsignedBigInteger('book_id');
             $table->unsignedBigInteger('order_id');
             $table->integer('amount');
-            $table->integer('price');
+            $table->double('price');
             $table->double('totalCost');
             $table->integer('status');
             $table->string('authorSurname')->nullable();

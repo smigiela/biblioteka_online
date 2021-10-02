@@ -260,6 +260,9 @@ table.vgt-table {
     min-width: 10px !important;
     width: 10px !important;
 }
+.btn-outline-success:hover {
+    color: #fff !important;
+}
 
 a {
     text-decoration: none !important;
@@ -297,6 +300,11 @@ a:hover {
     margin: 3vh !important;
 }
 
+.cartMakeOrder a {
+    font-size: 20px !important;
+    padding: 2vh !important;
+}
+
 .deleteHover:hover {
     color: red !important;
 }
@@ -310,6 +318,18 @@ a:hover {
 @media (min-width: 640px) {
     .sm\:ml-10 {
         margin-left: 1rem !important;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .cartMakeOrder {
+        width: 100% !important;
+        text-align: center !important;
+        margin: auto !important;
+        margin-bottom: 10px !important;
+    }
+    .cartMakeOrder a {
+        width: 100% !important;
     }
 }
 

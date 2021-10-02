@@ -45,4 +45,10 @@ class DashboardController extends Controller
         return view('adminPanel');
     }
 
+    public function detailBook($id)
+    {
+        $book = Book::where('id', $id)->with('author')->with('category')->first();
+        return view('bookDetail', ['book' => $book]);
+    }
+
 }

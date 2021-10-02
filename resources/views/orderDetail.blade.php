@@ -15,15 +15,24 @@
                     @endforeach
 
                     @foreach($orderDetail as $order)
+                        <h4 style="text-align: center">{{$order->created_at}}</h4>
+
 
                         @foreach($order->carts as $cart)
-                            {{$cart->book->title}},
-                            {{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.<br><br>
-
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tbody>
+                                <tr style="border-bottom: 1px solid #ccc;"></tr>
+                                <tr style="border-bottom: 1px solid #ccc;">
+                                    <td style="background-color: white !important; width: 50%; padding: 15px;">{{$cart->book->title}}</td>
+                                    <td style="background-color: white !important; width: 50%; text-align: right; padding: 15px;">{{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         @endforeach
 
-                    @endforeach
 
+                    @endforeach
+                    <h4 style="margin-top: 20px; text-align: center">Łączny koszt: <span class="fw-bold">{{$totalPrice}} zł</span></h4>
                 </div>
             </div>
         </div>

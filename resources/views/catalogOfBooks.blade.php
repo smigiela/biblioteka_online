@@ -18,7 +18,9 @@
                         @foreach ($books as $book)
                             <div class="oneOfBook card">
 
-                                <h5 class="card-header">{{$book->title}}</h5>
+                                <h5 class="card-header">
+                                    <a href="{{ url('/detailBook/'.$book->id) }}" class="cartColor">{{$book->title}}</a>
+                                </h5>
 
                                 <div class="card-body">
 

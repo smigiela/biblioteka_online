@@ -28,8 +28,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/deleteCart/{id}', [CartController::class, 'destroy']);
     Route::get('/order', [OrderController::class, 'index'])->name('order');
+    Route::get('/adminOrder', [OrderController::class, 'adminOrder']);
     Route::get('/submitOrder', [OrderController::class, 'submitOrder']);
     Route::get('/detailOrder/{id}', [OrderController::class, 'detailOrder']);
+    Route::get('/detailBook/{id}', [DashboardController::class, 'detailBook']);
 });
 
 // auth -admin
