@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\User;
@@ -61,7 +62,6 @@ class OrderController extends Controller
             $number = 0;
             $newItem->number = ++$number; // zwiększenie numeru o jeden
         }
-
         $newItem->month = $actualMonth; //aktualny miesiac
         $newItem->year = $actualYear; //aktualny rok
         $newItem->orderNumber = "FAV/" . $number . "/" . $actualMonth . "/" . $actualYear; //pełna nazwa
@@ -74,6 +74,14 @@ class OrderController extends Controller
                 $status->each->update(['status' => 1]);
             }, $column = 'id');
 
+        $minusAmount = Cart::where('user_id', Auth::user()->id)->where('status', 1)->where('order_id', $newItem->number)->get('book_id');
+        $book = Book::find($minusAmount);
+        dd($book);
+        if ($book) {
+            $book->amount = $book->amount - 1;
+            $newItem->save();
+        }
+        return "Item not found";
         return redirect('/cart')->with('messageGreen', 'Pomyślnie złożono zamówienie!');
     }
 
@@ -81,8 +89,7 @@ class OrderController extends Controller
     {
         $user = Order::where('id', $id)->where('user_id', Auth::user()->id)->first() ?? null;
 
-        if (Auth::user()->hasRole('admin'))
-        {
+        if (Auth::user()->hasRole('admin')) {
             $orderDetail = Order::with('carts')
                 ->where('id', $id)
                 ->get();
@@ -92,9 +99,7 @@ class OrderController extends Controller
             $totalPrice = Cart::where('order_id', $id)->sum('totalCost') ?? null;
 
             return view('orderDetail', ['orderDetail' => $orderDetail, 'dt' => $dt, 'totalPrice' => $totalPrice]);
-        }
-        elseif ($user)
-        {
+        } elseif ($user) {
             $orderDetail = Order::with('carts')
                 ->where('user_id', Auth::user()->id)
                 ->where('id', $id)

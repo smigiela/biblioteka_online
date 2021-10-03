@@ -59,9 +59,14 @@
                                             <td class="tdRight">{{$book->category->nameOfCategory}}</td>
                                         </tr>
 
-                                        <tr class="trBorder" style="border: none;">
+                                        <tr class="trBorder">
                                             <td class="tdLeft">Cena</td>
                                             <td class="tdRight">{{$book->price}} zł</td>
+                                        </tr>
+
+                                        <tr class="trBorder" style="border: none;">
+                                            <td class="tdLeft">Dostępnych </td>
+                                            <td class="tdRight">{{$book->amount}} sztuk</td>
                                         </tr>
 
                                         </tbody>
@@ -72,6 +77,7 @@
                                         <input name="user_id" type="hidden" value="{{Auth::user()->id}}">
                                         <input name="book_id" type="hidden" value="{{$book->id}}">
                                         <input name="amount" type="hidden" value="1">
+                                        <input name="amount_default" type="hidden" value="{{$book->amount}}">
                                         <input name="price" type="hidden" value="{{$book->price}}">
                                         <input name="author_lname" type="hidden" value="{{$book->author->lname}}">
                                         <input name="author_fname" type="hidden" value="{{$book->author->fname}}">
