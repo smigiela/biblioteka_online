@@ -32,6 +32,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/submitOrder', [OrderController::class, 'submitOrder']);
     Route::get('/detailOrder/{id}', [OrderController::class, 'detailOrder']);
     Route::get('/detailBook/{id}', [DashboardController::class, 'detailBook']);
+    Route::get('/book/search', [DashboardController::class, 'search']);
 });
 
 // auth -admin

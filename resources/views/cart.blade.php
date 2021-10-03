@@ -69,14 +69,22 @@
                                             </svg>
 
                                             </a></span>
-                                        {{$cart->book->title}}</td>
+                                        <a href="{{ url('/detailBook/'.$cart->book->id) }}" class="cartColor">{{$cart->book->title}}</a>
+
+                                    </td>
                                     <td style="background-color: white !important; width: 50%; text-align: right; padding: 15px;">{{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.</td>
                                 </tr>
                                 </tbody>
                             </table>
 
                         @endforeach
-                        <div class="cartMakeOrder" style="float: left">Łączny koszt: <span class="fw-bold">{{$totalPrice}} zł</span></div><div class="cartMakeOrder" style="float: right;"><a style="display: inline !important;" class="btn btn-outline-success" href="{{ url('submitOrder') }}">Złóż zamówienie</a></div>
+                        <div class="cartMakeOrder" style="float: left">
+                            Łączny koszt: <span class="fw-bold">{{$totalPrice}} zł</span>
+                        </div>
+
+                        <div class="cartMakeOrder" style="float: right;">
+                            <a style="display: inline !important;" class="btn btn-outline-success" href="{{ url('submitOrder') }}">Złóż zamówienie</a>
+                        </div>
                     @else
                         <div class="alert alert-primary d-flex align-items-center" role="alert">
                             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>

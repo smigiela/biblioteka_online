@@ -260,6 +260,7 @@ table.vgt-table {
     min-width: 10px !important;
     width: 10px !important;
 }
+
 .btn-outline-success:hover {
     color: #fff !important;
 }
@@ -282,6 +283,8 @@ a:hover {
     width: 32%;
     float: left;
     margin: 1% 0 2% 1%;
+    overflow: auto;
+    height: 300px;
 }
 
 .cartHeader {
@@ -309,7 +312,70 @@ a:hover {
     color: red !important;
 }
 
-@media only screen and (max-width: 520px) {
+.trBorder {
+    border-bottom: 1px solid #ccc;
+}
+
+.tdLeft {
+    background-color: white !important;
+    width: 50%;
+    padding: 15px;
+}
+
+.tdRight {
+    background-color: white !important;
+    width: 50%;
+    text-align: right;
+    padding: 15px;
+}
+
+.searchBar {
+    width: 100%;
+    margin: auto;
+}
+
+.searchBarLeft {
+    float: left;
+    width: 79%;
+    height: 7vh;
+    margin: 0.5%;
+}
+
+.searchBarRight {
+    float: right;
+    width: 19%;
+    height: 7vh;
+    margin: 0.5%;
+}
+
+.inputSearch {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border-color: #198754;
+    font-size: 20px !important;
+    padding: 2vh !important;
+    vertical-align: center;
+}
+
+.cursorSearch {
+    cursor: text !important;
+    text-align: left !important;
+}
+
+.inputSearch::placeholder {
+    color: #28a745;
+    opacity: 1;
+}
+
+.inputSearch:hover::placeholder {
+    color: white !important;
+    border-color: #198754 !important;
+    opacity: 1;
+}
+
+
+@media only screen and (max-width: 900px) {
     .oneOfBook {
         width: 100% !important;
     }
@@ -328,14 +394,27 @@ a:hover {
         margin: auto !important;
         margin-bottom: 10px !important;
     }
+
     .cartMakeOrder a {
         width: 100% !important;
     }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1250px) {
     .oneOfBook {
         width: 48%;
+    }
+}
+@media only screen and (max-width: 1050px) {
+    .searchBarLeft {
+        width: 100%;
+        margin: auto;
+    }
+    .searchBarRight {
+        width: 100%;
+        float: left;
+        margin: auto;
+        margin-top: 2vh !important;
     }
 }
 

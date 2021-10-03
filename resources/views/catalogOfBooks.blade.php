@@ -13,20 +13,59 @@
 
                     <h2 style="margin-bottom: 3vh;" class="text-center">Katalog książek</h2>
 
+                    <form action="{{ url('/book/search') }}" method="get">
+                        @csrf
+
+                        <div class="searchBar">
+
+                            <div class="searchBarLeft">
+                                <input class="btn btn-outline-success inputSearch cursorSearch" placeholder="Szukaj książki... " type="text" id="findTitle" name="findTitle">
+                            </div>
+
+                            <div class="searchBarRight">
+                                <input class="btn btn-outline-success inputSearch" type="submit" value="Szukaj / Resetuj">
+                            </div>
+
+                        </div>
+
+                    </form>
+                    <br>
+                    <br>
+
                     @if($books->count())
 
                         @foreach ($books as $book)
                             <div class="oneOfBook card">
 
                                 <h5 class="card-header">
-                                    <a href="{{ url('/detailBook/'.$book->id) }}" class="cartColor">{{$book->title}}</a>
+                                    <div class="text-center">
+                                        <a href="{{ url('/detailBook/'.$book->id) }}"
+                                           class="cartColor">{{$book->title}}</a>
+                                    </div>
                                 </h5>
 
                                 <div class="card-body">
 
-                                    <p class="card-text">{{$book->author->fname}} {{$book->author->lname}}</p>
-                                    <p class="card-text">{{$book->category->nameOfCategory}}</p>
-                                    <p class="card-text">{{$book->price}} zł</p>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tbody>
+
+                                        <tr class="trBorder">
+                                            <td class="tdLeft">Autor</td>
+                                            <td class="tdRight">{{$book->author->fname}} {{$book->author->lname}}</td>
+                                        </tr>
+
+                                        <tr class="trBorder">
+                                            <td class="tdLeft">Gatunek</td>
+                                            <td class="tdRight">{{$book->category->nameOfCategory}}</td>
+                                        </tr>
+
+                                        <tr class="trBorder" style="border: none;">
+                                            <td class="tdLeft">Cena</td>
+                                            <td class="tdRight">{{$book->price}} zł</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
 
                                     <form action="{{ url('addToCart') }}" method="post" novalidate>
                                         @csrf
@@ -36,8 +75,12 @@
                                         <input name="price" type="hidden" value="{{$book->price}}">
                                         <input name="author_lname" type="hidden" value="{{$book->author->lname}}">
                                         <input name="author_fname" type="hidden" value="{{$book->author->fname}}">
-                                        <input name="category" type="hidden" value="{{$book->category->nameOfCategory}}">
-                                        <button class="btn btn-outline-success" type="submit">Dodaj do koszyka</button>
+                                        <input name="category" type="hidden"
+                                               value="{{$book->category->nameOfCategory}}">
+                                        <div class="text-center">
+                                            <button class="btn btn-outline-success" type="submit">Dodaj do koszyka
+                                            </button>
+                                        </div>
                                     </form>
 
                                 </div>
@@ -45,7 +88,7 @@
                             </div>
                         @endforeach
                     @else
-                        <p style="color:red; text-align: center; font-size: 5vh;">Brak aktualnie dostępnych książek!</p>
+                        <p style="color:red; text-align: center; font-size: 5vh; margin-top: 5vh;">Brak dostępnych książek!</p>
                     @endif
 
                 </div>

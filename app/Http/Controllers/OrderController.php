@@ -15,9 +15,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $admin = User::where('id', Auth::user()->id)->where('name', 'Administrator')->first() ?? null;
-
-        if ($admin) {
+        if (Auth::user()->hasRole('admin')) {
             $order = Order::with('carts')
                 ->get();
 
@@ -108,7 +106,7 @@ class OrderController extends Controller
             return view('orderDetail', ['orderDetail' => $orderDetail, 'dt' => $dt, 'totalPrice' => $totalPrice]);
 
         } else {
-            return redirect('/order')->with('messageRed', 'Brak uprawnień do wykonania tej czynności!');
+            abort(403, 'Brak uprawnień');
         }
 
     }

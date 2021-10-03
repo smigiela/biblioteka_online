@@ -47,8 +47,17 @@ class DashboardController extends Controller
 
     public function detailBook($id)
     {
+        $borrowedTimes = Cart::where('book_id', $id)->count();
         $book = Book::where('id', $id)->with('author')->with('category')->first();
-        return view('bookDetail', ['book' => $book]);
+        return view('bookDetail', ['book' => $book, 'borrowedTimes' => $borrowedTimes]);
     }
 
+    public function search(Request $request)
+    {
+        $books = Book::where('title', 'like', '%'.$request->findTitle.'%')->with('category')
+            ->with('author')
+            ->get();
+
+        return view('catalogOfBooks', ['books' => $books]);
+    }
 }

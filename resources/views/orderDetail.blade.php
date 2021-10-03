@@ -21,10 +21,10 @@
                         @foreach($order->carts as $cart)
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                                 <tbody>
-                                <tr style="border-bottom: 1px solid #ccc;"></tr>
-                                <tr style="border-bottom: 1px solid #ccc;">
-                                    <td style="background-color: white !important; width: 50%; padding: 15px;">{{$cart->book->title}}</td>
-                                    <td style="background-color: white !important; width: 50%; text-align: right; padding: 15px;">{{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.</td>
+                                <tr class="trBorder"></tr>
+                                <tr class="trBorder">
+                                    <td class="tdLeft">{{$cart->book->title}}</td>
+                                    <td class="tdRight">{{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.</td>
                                 </tr>
                                 </tbody>
                             </table>
