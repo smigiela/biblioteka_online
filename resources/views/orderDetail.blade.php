@@ -24,7 +24,7 @@
                                 <tr class="trBorder"></tr>
                                 <tr class="trBorder">
                                     <td class="tdLeft">{{$cart->book->title}}</td>
-                                    <td class="tdRight">{{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.</td>
+                                    <td class="tdRight"><!--{{$cart->amount}} * {{$cart->price}} zł = -->{{$cart->totalCost}} zł.</td>
                                 </tr>
                                 </tbody>
                             </table>

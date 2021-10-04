@@ -21,6 +21,7 @@ class BookRequest extends FormRequest
         ],
         self::METHOD_POST => [
             'title' => 'required|string|min:3|max:255',
+            'amount' => 'required|integer|max:2147483648|gt:-1',
             'ISBN' => 'required|digits:13|unique:books,ISBN|gt:0',
             'author_id' => 'required|integer|exists:authors,id',
             'category_id' => 'required|integer|exists:categories,id',
@@ -31,6 +32,7 @@ class BookRequest extends FormRequest
         ],
         self::METHOD_PUT => [
             'title' => 'required|string|min:3|max:255',
+            'amount' => 'required|integer|max:2147483648|gt:-1',
             'ISBN' => array('required','digits:13','gt:0'),
             'author_id' => 'required|integer|exists:authors,id',
             'category_id' => 'required|integer|exists:categories,id',
@@ -88,6 +90,11 @@ class BookRequest extends FormRequest
             'title.string' => 'Pole tytuł musi zawierać tekst',
             'title.min' => 'Pole tytuł musi składać się z conajmniej 3 znaków',
             'title.max' => 'Pole tytuł może maksymalnie zawierać 255 znaków',
+
+            'amount.required' => 'Pole ilość jest wymagane',
+            'amount.integer' => 'Pole ilość musi zawierać wartość liczbową',
+            'amount.max' => 'Wartość pola ilość może maksymalnie wynosić 2147483648',
+            'amount.gt' => 'Pole ilość musi zawierać wartość nieujemną',
 
             'price.required' => 'Pole cena jest wymagane',
             'price.numeric' => 'Pole cena musi zawierać wartość liczbową z separatorem "."',

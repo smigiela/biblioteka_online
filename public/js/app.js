@@ -4622,6 +4622,9 @@ __webpack_require__.r(__webpack_exports__);
         label: 'Cena',
         field: 'price'
       }, {
+        label: 'Ilość',
+        field: 'amount'
+      }, {
         label: 'Operacje',
         field: 'operations',
         sortable: false
@@ -4753,6 +4756,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "addBook",
   data: function data() {
@@ -4763,6 +4772,7 @@ __webpack_require__.r(__webpack_exports__);
         category_id: "",
         ISBN: "",
         title: "",
+        amount: "",
         price: "",
         publisher: "",
         language: "",
@@ -4963,6 +4973,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "editBook",
   props: ["book"],
@@ -4974,6 +4989,7 @@ __webpack_require__.r(__webpack_exports__);
         category_id: "",
         ISBN: "",
         title: "",
+        amount: "",
         price: "",
         publisher: "",
         language: "",
@@ -5006,6 +5022,7 @@ __webpack_require__.r(__webpack_exports__);
       this.formValues.author_id = this.book.author_id;
       this.formValues.category_id = this.book.category_id;
       this.formValues.price = this.book.price;
+      this.formValues.amount = this.book.amount;
       this.formValues.publisher = this.book.publisher;
       this.formValues.language = this.book.language;
       this.formValues.description = this.book.description;
@@ -5042,6 +5059,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -36472,6 +36490,48 @@ var render = function() {
                           staticClass:
                             "input-group-text widthForm alert-success"
                         },
+                        [_vm._v("Ilość")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formValues.amount,
+                            expression: "formValues.amount"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "amount",
+                          type: "text",
+                          "aria-label": "Sizing example input",
+                          "aria-describedby": "inputGroup-sizing-default"
+                        },
+                        domProps: { value: _vm.formValues.amount },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.formValues,
+                              "amount",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group mb-3" }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "input-group-text widthForm alert-success"
+                        },
                         [_vm._v("Wydawca")]
                       ),
                       _vm._v(" "),
@@ -37068,6 +37128,47 @@ var render = function() {
                       {
                         staticClass: "input-group-text widthForm alert-success"
                       },
+                      [_vm._v("Ilość")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formValues.amount,
+                          expression: "formValues.amount"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "amount",
+                        type: "text",
+                        "aria-label": "Sizing example input",
+                        "aria-describedby": "inputGroup-sizing-default"
+                      },
+                      domProps: { value: _vm.formValues.amount },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.formValues,
+                            "amount",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "input-group-text widthForm alert-success"
+                      },
                       [_vm._v("Wydawca")]
                     ),
                     _vm._v(" "),
@@ -37352,6 +37453,13 @@ var render = function() {
                 _vm._v("Cena: "),
                 _vm.items.price
                   ? _c("span", [_vm._v(_vm._s(_vm.items.price))])
+                  : _c("span", [_vm._v("Brak danych")])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("Ilość: "),
+                _vm.items.amount
+                  ? _c("span", [_vm._v(_vm._s(_vm.items.amount))])
                   : _c("span", [_vm._v("Brak danych")])
               ]),
               _vm._v(" "),

@@ -63,6 +63,12 @@
                         </div>
 
                             <div class="input-group mb-3">
+                              <span class="input-group-text widthForm alert-success">Ilość</span>
+                              <input v-model="formValues.amount" id="amount" type="text" class="form-control"
+                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                            <div class="input-group mb-3">
                               <span class="input-group-text widthForm alert-success">Wydawca</span>
                               <input v-model="formValues.publisher" id="publisher" type="text" class="form-control"
                                      aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -106,6 +112,7 @@ export default {
                 category_id: "",
                 ISBN: "",
                 title: "",
+                amount: "",
                 price: "",
                 publisher: "",
                 language: "",

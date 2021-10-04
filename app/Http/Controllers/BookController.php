@@ -32,6 +32,7 @@ class BookController extends Controller
         $newItem->category_id = $request->get("category_id");
         $newItem->ISBN = $request->get("ISBN");
         $newItem->title = $request->get("title");
+        $newItem->amount = $request->get("amount");
         $newItem->price = $request->get("price");
         $newItem->publisher = $request->get("publisher");
         $newItem->language = $request->get("language");

@@ -69,7 +69,7 @@ class CartController extends Controller
             $newItem->amount = $request->get("amount_default");
             $newItem->price = $request->get("price");
             $newItem->status = 0;
-            $newItem->totalCost = round($request->get("price") * $request->get("amount"), 2);
+            $newItem->totalCost = round($request->get("price") * $request->get("amount_default"), 2);
             $newItem->save();
 
             return redirect('/cart')->with('messageGreen', 'Pomyślnie dodano do koszyka!');

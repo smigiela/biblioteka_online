@@ -78,6 +78,10 @@ export default {
                     field: 'price',
                 },
                 {
+                    label: 'Ilość',
+                    field: 'amount',
+                },
+                {
                     label: 'Operacje',
                     field: 'operations',
                     sortable: false,

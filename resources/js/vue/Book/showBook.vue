@@ -23,6 +23,7 @@
                     <p>Autor: <span v-if="items.author_id">{{ items.author.fname }} {{ items.author.lname }}</span><span v-else>Brak danych</span></p>
                     <p>Gatunek: <span v-if="items.category_id">{{items.category.nameOfCategory}}</span><span v-else>Brak danych</span></p>
                     <p>Cena: <span v-if="items.price">{{items.price}}</span><span v-else>Brak danych</span></p>
+                    <p>Ilość: <span v-if="items.amount">{{items.amount}}</span><span v-else>Brak danych</span></p>
                     <p>Wydawca: <span v-if="items.publisher">{{items.publisher}}</span><span v-else>Brak danych</span></p>
                     <p>Język: <span v-if="items.language">{{items.language}}</span><span v-else>Brak danych</span></p>
                     <p>Opis: <span v-if="items.description">{{items.description}}</span><span v-else>Brak danych</span></p>

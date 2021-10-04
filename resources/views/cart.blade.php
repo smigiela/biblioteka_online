@@ -72,7 +72,7 @@
                                         <a href="{{ url('/detailBook/'.$cart->book->id) }}" class="cartColor">{{$cart->book->title}}</a>
 
                                     </td>
-                                    <td style="background-color: white !important; width: 50%; text-align: right; padding: 15px;">{{$cart->amount}} * {{$cart->price}} zł = {{$cart->totalCost}} zł.</td>
+                                    <td style="background-color: white !important; width: 50%; text-align: right; padding: 15px;"><!--{{$cart->amount}} * {{$cart->price}} zł = -->{{$cart->totalCost}} zł</td>
                                 </tr>
                                 </tbody>
                             </table>

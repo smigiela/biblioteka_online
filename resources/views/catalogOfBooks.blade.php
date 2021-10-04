@@ -66,7 +66,13 @@
 
                                         <tr class="trBorder" style="border: none;">
                                             <td class="tdLeft">Dostępnych </td>
-                                            <td class="tdRight">{{$book->amount}} sztuk</td>
+                                            <td class="tdRight">
+                                                @if($book->amount <= 0)
+                                                    <span style="color: red;">Niedostępne</span>
+                                                @else
+                                                    {{$book->amount}} sztuk
+                                                @endif
+                                            </td>
                                         </tr>
 
                                         </tbody>
@@ -76,16 +82,23 @@
                                         @csrf
                                         <input name="user_id" type="hidden" value="{{Auth::user()->id}}">
                                         <input name="book_id" type="hidden" value="{{$book->id}}">
-                                        <input name="amount" type="hidden" value="1">
-                                        <input name="amount_default" type="hidden" value="{{$book->amount}}">
+                                        <input name="amount" type="hidden" value="{{$book->amount}}">
+                                        <input name="amount_default" type="hidden" value="1">
                                         <input name="price" type="hidden" value="{{$book->price}}">
                                         <input name="author_lname" type="hidden" value="{{$book->author->lname}}">
                                         <input name="author_fname" type="hidden" value="{{$book->author->fname}}">
                                         <input name="category" type="hidden"
                                                value="{{$book->category->nameOfCategory}}">
                                         <div class="text-center">
-                                            <button class="btn btn-outline-success" type="submit">Dodaj do koszyka
-                                            </button>
+
+                                            @if($book->amount <= 0)
+                                                <button class="btn btn-outline-success" type="submit"  disabled>Dodaj do koszyka
+                                                </button>
+                                            @else
+                                                <button class="btn btn-outline-success" type="submit">Dodaj do koszyka
+                                                </button>
+                                            @endif
+
                                         </div>
                                     </form>
 
