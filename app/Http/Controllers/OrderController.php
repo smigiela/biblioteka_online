@@ -74,12 +74,16 @@ class OrderController extends Controller
                 $status->each->update(['status' => 1]);
             }, $column = 'id');
 
-        $books_id = Cart::where('user_id', Auth::user()->id)->where('status', 1)->where('order_id', $newItem->number)->get('book_id');
-        $books = Book::find($books_id);
-        foreach ($books as $book){
-            $borrowedBook = Book::find($book->id);
-            $borrowedBook->amount = $book->amount - 1;
-            $borrowedBook->save();
+        $books_id = Cart::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->where('order_id', $newItem->number)
+            ->pluck('book_id');
+
+        $bookCounts = $books_id->countBy()->all();
+
+        foreach ($bookCounts as $book => $count){
+            $borrowedBook = Book::find($book);
+            $borrowedBook->decrement('amount', $count);
         }
         return redirect('/cart')->with('messageGreen', 'Pomyślnie złożono zamówienie!');
     }

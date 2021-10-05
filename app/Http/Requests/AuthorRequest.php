@@ -87,16 +87,4 @@ class AuthorRequest extends FormRequest
         ];
     }
 
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'dateOfBirth' => Carbon::parse($this->dateOfBirth),
-            'dateOfDeath' => Carbon::parse($this->dateOfDeath),
-        ]);
-    }
 }
