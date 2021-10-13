@@ -32529,6 +32529,12 @@ a:hover {
   opacity: 1;
 }
 
+.registerForm {
+  max-width: 95%;
+  margin: auto;
+  margin-top: 15px !important;
+}
+
 @media only screen and (max-width: 900px) {
   .oneOfBook {
     width: 100% !important;

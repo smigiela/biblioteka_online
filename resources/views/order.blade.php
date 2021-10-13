@@ -36,16 +36,24 @@
                         </div>
                     @endif
 
-                    @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
-                        <div class="text-center mb-6">
-                            <h2>Wszystkie zamówienia użytkowników:</h2>
-                            <a href="{{ url('/adminOrder')}}" style="font-size: 20px;" class="btn btn-outline-success">Wyświetl tylko zamówienia administratora</a><br>
-                        </div>
-                    @endif
+
+                        @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
+                            <div class="text-center mb-6">
+                                <h2>Wszystkie zamówienia użytkowników:</h2>
+
+                                @if($order->count())
+                                <a href="{{ url('/adminOrder')}}" style="font-size: 20px;"
+                                   class="btn btn-outline-success">Wyświetl tylko zamówienia administratora</a><br>
+                                @endif
+
+                            </div>
+                        @endif
+
 
                     @forelse ($order as $order)
                         <a href="{{ url('/detailOrder/'.$order->id) }}" class="btn">Zamówienie {{$order->orderNumber}}
-                            ({{$order->created_at}}) @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin'])) User ID: {{$order->user_id}}@endif</a>
+                            ({{$order->created_at}}) @if(\Illuminate\Support\Facades\Auth::user()->hasRole(['admin']))
+                                User ID: {{$order->user_id}}@endif</a>
                         <br>
                     @empty
                         <div class="alert alert-primary d-flex align-items-center" role="alert">

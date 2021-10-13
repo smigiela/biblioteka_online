@@ -374,6 +374,12 @@ a:hover {
     opacity: 1;
 }
 
+.registerForm {
+    max-width: 95%;
+    margin: auto;
+    margin-top: 15px !important;
+}
+
 
 @media only screen and (max-width: 900px) {
     .oneOfBook {
@@ -405,11 +411,13 @@ a:hover {
         width: 48%;
     }
 }
+
 @media only screen and (max-width: 1050px) {
     .searchBarLeft {
         width: 100%;
         margin: auto;
     }
+
     .searchBarRight {
         width: 100%;
         float: left;
