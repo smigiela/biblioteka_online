@@ -37,7 +37,31 @@ class OrderController extends Controller
 
     public function submitOrder()
     {
+        dd(Order::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES"));
+        $cart = Cart::where('user_id', Auth::user()->id)->where('status', 0)->pluck('book_id');
+        $inCart = $cart->countBy()->all();
+
+        foreach ($inCart as $keyBookId => $count) {
+            $actualBook = Book::find($keyBookId);
+            if ($actualBook->amount >= $count) {
+                continue;
+            }
+            return redirect('/cart')->with('messageRed', 'Nieprawidłowa ilość egzemplarzy w koszyku!');
+        }
+
         $newItem = new Order;
+
+        $actualCart = Cart::where('user_id', Auth::user()->id)
+            ->where('status', 0)
+            ->chunkById(200, function ($status) {
+                $lastIdOfOrders = Order::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES");
+//        dd($lastIdOfOrders);
+                $status->each->update(['order_id' => $lastIdOfOrders]);
+                $status->each->update(['status' => 1]);
+            }, $column = 'id');;
+
+//            przedmiot znika z koszyka, bo status sie zmienia. Dodatkowo nowe zamowienie ma juz swoje pozycje z koszyka
+//        dd($actualCart);
 
         $dt = Carbon::parse();
         $actualMonth = $dt->month; //symulacja miesiecy
@@ -57,31 +81,26 @@ class OrderController extends Controller
                 $number = 0;
             }
 
-            $newItem->number = ++$number; // zwiększenie numeru o jeden
+            $newItem->number = ++$number;
         } else {
             $number = 0;
-            $newItem->number = ++$number; // zwiększenie numeru o jeden
+            $newItem->number = ++$number;
         }
-        $newItem->month = $actualMonth; //aktualny miesiac
-        $newItem->year = $actualYear; //aktualny rok
+        $newItem->month = $actualMonth;
+        $newItem->year = $actualYear;
         $newItem->orderNumber = "FAV/" . $number . "/" . $actualMonth . "/" . $actualYear; //pełna nazwa
         $newItem->user_id = Auth::user()->id;
         $newItem->save();
 
-
-        $var = Cart::where('user_id', Auth::user()->id)
-            ->chunkById(200, function ($status) {
-                $status->each->update(['status' => 1]);
-            }, $column = 'id');
-
+        //poprawic
         $books_id = Cart::where('user_id', Auth::user()->id)
             ->where('status', 1)
-            ->where('order_id', $newItem->number)
+            ->where('order_id', Order::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES")) //lub -1
             ->pluck('book_id');
 
         $bookCounts = $books_id->countBy()->all();
 
-        foreach ($bookCounts as $book => $count){
+        foreach ($bookCounts as $book => $count) {
             $borrowedBook = Book::find($book);
             $borrowedBook->decrement('amount', $count);
         }

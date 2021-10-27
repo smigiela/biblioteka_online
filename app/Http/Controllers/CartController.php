@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartRequest;
+use App\Models\Book;
 use App\Models\Cart;
 use App\Models\Order;
 use Carbon\Carbon;
@@ -35,47 +36,29 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->amount > 0) {
-            $newItem = new Cart;
+        $inCart = Cart::where('user_id', Auth::user()->id)->where('status', 0)->where('book_id', $request->get("book_id"))->count();
+        $inCartAvailable = Book::where('id', $request->get("book_id"))->first('amount');
+        if ($inCart < $inCartAvailable->amount) {
+            if ($request->amount > 0) {
 
-            $dt = Carbon::parse();
-            $actualMonth = $dt->month; //symulacja miesiecy
-            $actualYear = $dt->year; //symulacja lat
-            $lastUsedMonth = Order::latest('month')->pluck('month')->first();
-            $lastUsedYear = Order::latest('year')->pluck('year')->first();
+                $newItem = new Cart;
+                $newItem->user_id = $request->get("user_id");
+                $newItem->book_id = $request->get("book_id");
+                $newItem->authorSurname = $request->get("author_lname");
+                $newItem->authorName = $request->get("author_fname");
+                $newItem->category = $request->get("category");
+                $newItem->amount = $request->get("amount_default");
+                $newItem->price = $request->get("price");
+                $newItem->status = 0;
+                $newItem->totalCost = round($request->get("price") * $request->get("amount_default"), 2);
+                $newItem->save();
 
-            if ($actualMonth == $lastUsedMonth || $actualYear == $lastUsedYear) { //jeśli miesiac i rok z ostatniego rekordu w bazie sa równe obecnemu miesiacowi i rokowi to tworzy nowy numer umowy z tym samym miesiacem i rokiem
-
-                $maxNumber = Order::where('month', $actualMonth)
-                    ->where('year', $actualYear)
-                    ->max('number');
-
-                if ($maxNumber) {
-                    $number = $maxNumber;
-                } else {
-                    $number = 0;
-                }
-                $newItem->order_id = ++$number;
+                return redirect('/cart')->with('messageGreen', 'Pomyślnie dodano do koszyka!');
             } else {
-                $number = 0;
-                $newItem->order_id = ++$number;
+                return redirect('/cart')->with('messageRed', 'Brak dostępnych egzemplarzy!');
             }
-
-            $newItem->user_id = $request->get("user_id");
-            $newItem->book_id = $request->get("book_id");
-            $newItem->authorSurname = $request->get("author_lname");
-            $newItem->authorName = $request->get("author_fname");
-            $newItem->category = $request->get("category");
-            $newItem->amount = $request->get("amount_default");
-            $newItem->price = $request->get("price");
-            $newItem->status = 0;
-            $newItem->totalCost = round($request->get("price") * $request->get("amount_default"), 2);
-            $newItem->save();
-
-            return redirect('/cart')->with('messageGreen', 'Pomyślnie dodano do koszyka!');
         } else {
-            return redirect('/cart')->with('messageRed', 'Brak dostępnych egzemplarzy!');
+            return redirect('/cart')->with('messageRed', 'Przekroczono limit dostępnych egzemplarzy! Nie można dodać więcej!');
         }
-
     }
 }
