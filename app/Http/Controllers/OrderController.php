@@ -54,8 +54,8 @@ class OrderController extends Controller
         $actualCart = Cart::where('user_id', Auth::user()->id)
             ->where('status', 0)
             ->chunkById(200, function ($status) {
-                $lastIdOfOrders = Order::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES");
-//        dd($lastIdOfOrders);
+                $lastIdOfOrders = Order::selectRaw("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'online_biblioteka' AND TABLE_NAME = 'orders'");
+        dd($lastIdOfOrders);
                 $status->each->update(['order_id' => $lastIdOfOrders]);
                 $status->each->update(['status' => 1]);
             }, $column = 'id');;
